@@ -2,18 +2,14 @@
 require_once "class/Todo.php";
 require_once "class/TodoList.php";
 
-$toto1 = new Todo('titre1', 'description1');
-$toto1->setCompleted();
-$toto2 = new Todo('titre2', 'description2');
-$toto2->setNotCompleted();
-
 $todoList = new TodoList();
-$todoList->addTodo($toto1);
-$todoList->addTodo($toto2);
-/*
-$todoList
-    ->addTodo(new Todo('titre1', 'description1'))
-    ->addTodo(new Todo('titre2', 'description2'));
-*/
-var_dump($todoList->showNotCompleted());
 
+$todoList
+    ->addTodo((new Todo('titre1', 'description1'))->setCompleted())
+    ->addTodo((new Todo('titre2', 'description2'))->setNotCompleted());
+
+var_dump("Affichage des tâches complétées >", $todoList->showCompleted());
+
+var_dump("Recherche de titre1 >", $todoList->search("titre1"));
+var_dump("Recherche de titre2 >", $todoList->search("titre2"));
+var_dump("Recherche de titre3 >", $todoList->search("titre3"));
