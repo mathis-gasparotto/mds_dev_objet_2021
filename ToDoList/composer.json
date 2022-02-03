@@ -1,0 +1,14 @@
+{
+    "name": "mathis/to-do-list",
+    "autoload": {
+        "psr-4": {
+            "ToDoList\\": "src/"
+        }
+    },
+    "require": {
+        "PHP": ">=8.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    }
+}
