@@ -1,0 +1,21 @@
+{
+    "name": "mathis/to-do-list-with-users",
+    "autoload": {
+        "psr-4": {
+            "ToDoListUsers\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mathis GASPAROTTO",
+            "email": "mathis.gasparotto@hotmail.com"
+        }
+    ],
+    "require": {
+        "PHP": ">=8.1",
+        "nunomaduro/termwind": "^1.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    }
+}
