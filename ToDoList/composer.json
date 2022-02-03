@@ -5,6 +5,12 @@
             "ToDoList\\": "src/"
         }
     },
+    "authors": [
+        {
+            "name": "Mathis GASPAROTTO",
+            "email": "mathis.gasparotto@hotmail.com"
+        }
+    ],
     "require": {
         "PHP": ">=8.1"
     },
