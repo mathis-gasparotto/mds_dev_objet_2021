@@ -8,12 +8,11 @@ class AskTodoFunctions
 {
 
     public function askIfNewTodo(): ?string {
-        $addTodo = ask(<<<HTML
+        return ask(<<<HTML
             <span class="mt-1 ml-2 mr-1 bg-green px-1 text-black">
                 Do you want to add a new to-do? (Y/n)
             </span>
         HTML);
-        return $addTodo;
     }
     public function askTodoTitle(): string {
         $todoTitle = ask(<<<HTML
