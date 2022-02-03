@@ -36,4 +36,23 @@ class AskTodoFunctions
         }
         return $todoDesc;
     }
+
+    public function askIfSearchTodo(): ?string {
+        return ask(<<<HTML
+            <span class="mt-1 ml-2 mr-1 bg-green px-1 text-black">
+                Do you want to search a to-do? (Y/n)
+            </span>
+        HTML);
+    }
+    public function askSearchTodo(): string {
+        $searchTodo = ask(<<<HTML
+            <span class="mt-1 ml-2 mr-1 bg-green px-1 text-black">
+                Title or description:
+            </span>
+        HTML);
+        if (!$searchTodo) {
+            return $this->askTodoDescription();
+        }
+        return $searchTodo;
+    }
 }

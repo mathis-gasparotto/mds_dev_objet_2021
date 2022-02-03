@@ -37,7 +37,7 @@ class TodoList
     public function search(string $searchText): array|string
     {
         $search = $this->filter(fn(Todo $todo) => str_contains($todo->title.$todo->description, $searchText));
-        if (empty($search)) {
+        if (!$search) {
             return "Aucun résultat trouvé";
         }
         return $search;
@@ -57,5 +57,8 @@ class TodoList
             $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
         }
         return $result."</ul>";
+    }
+    public function print(): string {
+        return "<ul>"."<li>".$this->title." - ".$this->description."</li>"."</ul>";
     }
 }

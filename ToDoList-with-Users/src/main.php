@@ -26,3 +26,15 @@ render(<<<'HTML'
     <p>Already done</p>
 HTML);
 render($todoList->printCompleted());
+
+if ($askTodo->askIfSearchTodo() !== 'n') {
+    $resultArray = $todoList->search($askTodo->askSearchTodo());
+    render(<<<'HTML'
+        <p>Result(s) of your search</p>
+    HTML);
+    $result = "<ul>";
+    foreach ($resultArray as $todo) {
+       $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
+    }
+    render($result."</ul>");
+}
