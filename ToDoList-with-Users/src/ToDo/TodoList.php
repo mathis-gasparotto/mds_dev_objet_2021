@@ -48,8 +48,7 @@ class TodoList
         foreach ($this->showNotCompleted() as $todo) {
             $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
         }
-        $result = $result."</ul>";
-        return $result;
+        return $result."</ul>";
     }
 
     public function printCompleted(): string {
@@ -57,7 +56,6 @@ class TodoList
         foreach ($this->showCompleted() as $todo) {
             $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
         }
-        $result = $result."</ul>";
-        return $result;
+        return $result."</ul>";
     }
 }
