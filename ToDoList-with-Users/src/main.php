@@ -8,33 +8,36 @@ use ToDoListUsers\ToDo\TodoList;
 use ToDoListUsers\User\User;
 use function Termwind\{render};
 
-$todoList = new TodoList();
-
 $askUser = new AskUserFunctions();
-$user = new User($askUser->askUsername());
+$user = new User($askUser->askUsername(), new TodoList());
 
 $askTodo = new AskTodoFunctions();
 
-while ($askTodo->askIfNewTodo() !== 'n') {
-    $todoList->addTodo(new Todo($askTodo->askTodoTitle(), $askTodo->askTodoDescription()));
+$askIfNew = $askTodo->askIfNewTodo();
+while ($askIfNew !== 'n') {
+    $user->todoList->addTodo(new Todo($askTodo->askTodoTitle(), $askTodo->askTodoDescription()));
+    $askIfNew = $askTodo->askIfNewTodo();
 }
-render(<<<'HTML'
-    <p>Todo</p>
-HTML);
-render($todoList->printNotCompleted());
-render(<<<'HTML'
-    <p>Already done</p>
-HTML);
-render($todoList->printCompleted());
-
-if ($askTodo->askIfSearchTodo() !== 'n') {
-    $resultArray = $todoList->search($askTodo->askSearchTodo());
+if ($user->todoList->todos) {
     render(<<<'HTML'
-        <p>Result(s) of your search</p>
+        <p>Todo</p>
     HTML);
-    $result = "<ul>";
-    foreach ($resultArray as $todo) {
-       $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
+    render($user->todoList->printNotCompleted());
+    render(<<<'HTML'
+        <p>Already done</p>
+    HTML);
+    render($user->todoList->printCompleted());
+
+    sleep(1);
+    if ($askTodo->askIfSearchTodo() !== 'n') {
+        $resultArray = $user->todoList->search($askTodo->askSearchTodo());
+        render(<<<'HTML'
+            <p>Result(s) of your search</p>
+        HTML);
+        $result = "<ul>";
+        foreach ($resultArray as $todo) {
+            $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
+        }
+        render($result."</ul>");
     }
-    render($result."</ul>");
 }

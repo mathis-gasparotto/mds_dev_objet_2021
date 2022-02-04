@@ -3,7 +3,7 @@ namespace ToDoListUsers\ToDo;
 
 class TodoList
 {
-    public array $todos;
+    public array $todos = [];
 
     public function filter(callable $filterFunction): array
     {
@@ -57,8 +57,5 @@ class TodoList
             $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
         }
         return $result."</ul>";
-    }
-    public function print(): string {
-        return "<ul>"."<li>".$this->title." - ".$this->description."</li>"."</ul>";
     }
 }
