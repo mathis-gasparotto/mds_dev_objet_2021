@@ -1,6 +1,8 @@
 <?php
 namespace ToDoListUsers\ToDo;
 
+use function Termwind\{render};
+
 class TodoList
 {
     public array $todos = [];
@@ -38,7 +40,7 @@ class TodoList
     {
         $search = $this->filter(fn(Todo $todo) => str_contains($todo->title.$todo->description, $searchText));
         if (!$search) {
-            return "Aucun résultat trouvé";
+            return "No results found";
         }
         return $search;
     }
@@ -57,5 +59,33 @@ class TodoList
             $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
         }
         return $result."</ul>";
+    }
+
+    public function printRender(): void {
+        render(<<<'HTML'
+            <p>Your To-dos:</p>
+            <p>To-do</p>
+        HTML);
+        render($this->printNotCompleted());
+        render(<<<'HTML'
+            <p>Already done</p>
+        HTML);
+        render($this->printCompleted());
+    }
+
+    public function printResults(array|string $resultSearch): void {
+        render(<<<'HTML'
+            <p>Result(s) of your search</p>
+        HTML);
+        if (is_array($resultSearch)) {
+            $resultToPrint = "<ul>";
+            foreach ($resultSearch as $todo) {
+                $resultToPrint = $resultToPrint."<li>".$todo->title." - ".$todo->description."</li>";
+            }
+            render($resultToPrint."</ul>");
+        } else {
+            $resultToPrint = "<p>".$resultSearch."</p>";
+            render($resultToPrint);
+        }
     }
 }
