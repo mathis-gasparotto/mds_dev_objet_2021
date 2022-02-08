@@ -46,24 +46,40 @@ class TodoList
     }
 
     public function printNotCompleted(): string {
+        if (!$this->showNotCompleted()) {
+            return "No To-do";
+        }
         $result = "<ul>";
         foreach ($this->showNotCompleted() as $todo) {
-            $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
+            $result = $result."<li>".$todo->title;
+            if ($todo->description) {
+                $result = $result." (".$todo->description.")</li>";
+            } else {
+                $result = $result."</li>";
+            }
         }
         return $result."</ul>";
     }
 
     public function printCompleted(): string {
+        if (!$this->showCompleted()) {
+            return "No tasks already done";
+        }
         $result = "<ul>";
         foreach ($this->showCompleted() as $todo) {
-            $result = $result."<li>".$todo->title." - ".$todo->description."</li>";
+            $result = $result."<li>".$todo->title;
+            if ($todo->description) {
+                $result = $result." (".$todo->description.")</li>";
+            } else {
+                $result = $result."</li>";
+            }
         }
         return $result."</ul>";
     }
 
-    public function printRender(): void {
+    public function printRender($username): void {
+        render("<p>Your To-dos (as ".$username."):</p>");
         render(<<<'HTML'
-            <p>Your To-dos:</p>
             <p>To-do</p>
         HTML);
         render($this->printNotCompleted());
@@ -80,7 +96,12 @@ class TodoList
         if (is_array($resultSearch)) {
             $resultToPrint = "<ul>";
             foreach ($resultSearch as $todo) {
-                $resultToPrint = $resultToPrint."<li>".$todo->title." - ".$todo->description."</li>";
+                $resultToPrint = $resultToPrint."<li>".$todo->title;
+                if ($todo->description) {
+                    $resultToPrint = $resultToPrint." (".$todo->description.")</li>";
+                } else {
+                    $resultToPrint = $resultToPrint."</li>";
+                }
             }
             render($resultToPrint."</ul>");
         } else {
