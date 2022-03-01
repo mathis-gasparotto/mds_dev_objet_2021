@@ -2,15 +2,21 @@
 
 @section('content')
 
-<ul>
+<div id="users-container">
     @foreach($users as $user)
-        <li>
-            <img src="{{ $user->avatar_url }}" width="100" alt="user's avatar">
-            <a href="{{route('users.show', $user->id)}}">{{ $user->name }} ({{ $user->email }})</a>
-            <a href="{{route('users.show', $user->id)}}/edit">Edit</a>
-            <a href="{{route('users.show', $user->id)}}/del">Delete</a>
-        </li>
+        <div class="user-container card">
+            <div class="user-content">
+                <img src="{{ $user->avatar_url }}" alt="user's avatar" class="user-img card-img-top">
+                <div class="user-text card-body">
+                    <h5 class="user-name card-title"><span class="user-label">Name:</span> {{ $user->name }}</h5>
+                    <p class="user-email card-text"><span class="user-label">Email:</span> {{ $user->email }}</p>
+                    <a href="{{route('users.show', $user)}}" class="btn btn-primary">Read more</a>
+                </div>
+
+            </div>
+
+        </div>
     @endforeach
-</ul>
+</div>
 
 @endsection

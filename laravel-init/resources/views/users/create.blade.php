@@ -2,13 +2,25 @@
 
 @section('content')
 
-<form action="{{route(users.store)}}" method="post">
+<form action="{{route('users.store')}}" method="post">
     @csrf
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="text" name="avatar_url" placeholder="Avatar URL" required>
-    <input type="submit" value="Create">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input class="form-control" id="name" type="text" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Email:</label>
+        <input class="form-control" id="email" type="email" name="email" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Password:</label>
+        <input class="form-control" id="password" type="text" name="password"" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Avatar URL:</label>
+        <input class="form-control" id="avatar_url" type="text" name="avatar_url" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
 
 @endsection

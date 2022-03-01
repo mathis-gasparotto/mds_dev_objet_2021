@@ -23,8 +23,7 @@ class Users extends Controller
      */
     public function create()
     {
-        echo view("users.create");
-        return view("users.index", ['users' => User::all()]);
+        return view("users.create");
     }
 
     /**
@@ -35,6 +34,7 @@ class Users extends Controller
     public function store(Request $request)
     {
         $input = $request->only(['name', 'email', 'password', 'avatar_url']);
+        $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         return redirect()->route('users.index');
     }
@@ -64,22 +64,23 @@ class Users extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Users  $users
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\User  $user
      */
-    public function update(Request $request, Users $users)
+    public function update(Request $request, User $user)
     {
-        //
+        $input = $request->only(['name', 'email', 'avatar_url']);
+        $user->update($input);
+        return redirect()->route('users.show', $user);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Users  $user
+     * @param  \App\Models\User  $user
      */
-    public function destroy(Users $user)
+    public function destroy(User $user)
     {
-        DB::table('users')
-            ->delete($user);
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }

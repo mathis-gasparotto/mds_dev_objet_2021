@@ -1,13 +1,18 @@
-@extends('layout')
+<form action="{{route('users.show', $user->id)}}" method="post">
+    @method('PUT')
+    @csrf
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input class="form-control" id="name" type="text" name="name" value="{{ $user->name }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Email:</label>
+        <input class="form-control" id="email" type="email" name="email" value="{{ $user->email }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Avatar URL:</label>
+        <input class="form-control" id="avatar_url" type="text" name="avatar_url" value="{{ $user->avatar_url }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
 
-@section('content')
-
-<form method="post">
-    {{ csrf_field() }}
-    <input type="text" name="name" placeholder="Name" value="{{ $user->name }}" required>
-    <input type="email" name="email" placeholder="Email" value="{{ $user->email }}" required>
-    <input type="text" name="avatar_url" placeholder="Avatar URL" value="{{ $user->avatar_url }}" required>
-    <input type="submit" value="Edit">
 </form>
-
-@endsection
