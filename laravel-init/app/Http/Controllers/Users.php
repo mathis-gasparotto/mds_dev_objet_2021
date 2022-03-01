@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Users extends Controller
 {
@@ -13,28 +14,29 @@ class Users extends Controller
      */
     public function index()
     {
-        return view("users", ['users' => User::all()]);
+        return view("users.index", ['users' => User::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        echo view("users.create");
+        return view("users.index", ['users' => User::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->only(['name', 'email', 'password', 'avatar_url']);
+        $user = User::create($input);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -51,11 +53,11 @@ class Users extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Users  $users
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Users $users)
+    public function edit(User $user)
     {
-        //
+        echo view('users.show', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -73,11 +75,11 @@ class Users extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Users  $users
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Users  $user
      */
-    public function destroy(Users $users)
+    public function destroy(Users $user)
     {
-        //
+        DB::table('users')
+            ->delete($user);
     }
 }
