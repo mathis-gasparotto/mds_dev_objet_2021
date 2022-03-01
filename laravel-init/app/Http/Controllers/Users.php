@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserFormRequest;
+use App\Http\Requests\UpdateUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,11 +31,11 @@ class Users extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUserFormRequest  $request
      */
-    public function store(Request $request)
+    public function store(StoreUserFormRequest $request)
     {
-        $input = $request->only(['name', 'email', 'password', 'avatar_url']);
+        $input = $request->safe()->only(['name', 'email', 'password', 'avatar_url']);
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         return redirect()->route('users.index');
@@ -63,12 +65,12 @@ class Users extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateUserFormRequest  $request
      * @param  \App\Models\User  $user
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserFormRequest $request, User $user)
     {
-        $input = $request->only(['name', 'email', 'avatar_url']);
+        $input = $request->safe()->only(['name', 'email', 'avatar_url']);
         $user->update($input);
         return redirect()->route('users.show', $user);
     }
