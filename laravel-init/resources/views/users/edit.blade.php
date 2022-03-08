@@ -1,4 +1,4 @@
-<form action="{{route('users.show', $user->id)}}" method="post">
+<form action="{{route('users.update', $user->id)}}" method="post">
     @method('PUT')
     @csrf
     <div class="mb-3">
