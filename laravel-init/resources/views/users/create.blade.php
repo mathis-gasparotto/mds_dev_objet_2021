@@ -30,6 +30,11 @@
 
     </div>
     <div class="mb-3">
+        <label for="password_confirmation" class="form-label">Password Confirmation:</label>
+        <input class="form-control" id="password_confirmation" type="password" name="password_confirmation" required>
+
+    </div>
+    <div class="mb-3">
         <label for="avatar_url" class="form-label">Avatar URL:</label>
         <input class="form-control @error('avatar_url') is-invalid @enderror" id="avatar_url" type="text" name="avatar_url" required>
         @error('avatar_url')
