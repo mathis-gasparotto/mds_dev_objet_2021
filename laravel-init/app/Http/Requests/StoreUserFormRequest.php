@@ -47,6 +47,7 @@ class StoreUserFormRequest extends FormRequest
             'avatar_url' => [
                 'required',
                 'max:191',
+                'url',
                 ],
         ];
     }

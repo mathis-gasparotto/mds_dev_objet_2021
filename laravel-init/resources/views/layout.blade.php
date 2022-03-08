@@ -36,6 +36,7 @@
     }
     .user-container .user-img {
         height: 15rem;
+        object-fit: cover;
     }
     header {
         margin-bottom: 70px;
