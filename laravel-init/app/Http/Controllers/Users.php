@@ -16,6 +16,7 @@ class Users extends Controller
      */
     public function index()
     {
+
         return view("users.index", ['users' => User::all()]);
     }
 
@@ -36,7 +37,7 @@ class Users extends Controller
     public function store(StoreUserFormRequest $request)
     {
         $input = $request->safe()->only(['name', 'email', 'password', 'avatar_url']);
-        $input['password'] = bcrypt($input['password']);
+        // $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         return redirect()->route('users.index');
     }

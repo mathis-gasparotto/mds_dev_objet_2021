@@ -8,14 +8,29 @@
 <header>
     <nav>
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a href="http://127.0.0.1:8000/users" class="nav-link">User List</a>
-            </li>
-            <li class="nav-item">
-                <a href="http://127.0.0.1:8000/users/create" class="nav-link">Create new user</a>
-            </li>
+            @auth
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link">User List</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.create') }}" class="nav-link">Create new user</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('auth.logout') }}" class="nav-link">Logout</a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a href="{{ route('auth.login') }}" class="nav-link">Log in</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('auth.register') }}" class="nav-link">Register</a>
+                </li>
+            @endif
         </ul>
     </nav>
+    @auth
+        Hello {{ \Illuminate\Support\Facades\Auth::user()->name }}!
+    @endauth
 </header>
 <main>
     @yield('content')
@@ -49,8 +64,8 @@
         justify-content: space-evenly;
         margin: auto;
     }
-    form {
-        width: 50%;
+    .card-form {
+        width: 30%;
         margin: auto;
     }
     footer {
