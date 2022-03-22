@@ -10,11 +10,16 @@
         <ul class="nav nav-tabs">
             @auth
                 <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link">User List</a>
+                    <a href="{{ route('user.dashboard') }}" class="nav-link">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('users.create') }}" class="nav-link">Create new user</a>
-                </li>
+                @if (\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}" class="nav-link">User List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('users.create') }}" class="nav-link">Create new user</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('auth.logout') }}" class="nav-link">Logout</a>
                 </li>
@@ -33,6 +38,10 @@
     @endauth
 </header>
 <main>
+    @if (session('error-perm'))
+        <div class="alert alert-danger status">{{ session('error-perm') }}</div>
+    @endif
+
     @yield('content')
 </main>
 <footer>
@@ -70,6 +79,17 @@
     }
     footer {
         margin-top: 50px;
+    }
+    .form-required::after {
+        content: "*";
+        color: red;
+        margin-left: 3px;
+    }
+    .status {
+        width: 30%;
+        margin: auto;
+        margin-bottom: 50px;
+        text-align: center;
     }
 </style>
 </html>

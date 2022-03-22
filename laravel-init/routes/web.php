@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Login;
 use App\Http\Controllers\PasswordControler;
-use App\Http\Controllers\Users;
+use App\Http\Controllers\UsersAdmin;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
@@ -32,15 +33,28 @@ Route::get('/', function () {
     ==> Route::resource('users', Users::class);
     */
 
-Route::resource('users', Users::class)->middleware(Authenticate::class);
 
-Route::get('/login', [Login::class, 'login'])->name('auth.login');
-Route::post('/login', [Login::class, 'authenticate'])->name('auth.authenticate');
-Route::get('/register', [Login::class, 'register'])->name('auth.register');
-Route::post('/register', [Login::class, 'registration'])->name('auth.registration');
-Route::get('/logout', [Login::class, 'logout'])->name('auth.logout');
+Route::middleware('auth')->group(function (){
+    Route::get('/logout', [Login::class, 'logout'])->name('auth.logout');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/dashboard/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::delete('/dashboard/delete', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::put('/dashboard', [UserController::class, 'update'])->name('user.update');
 
-Route::get('/password', [PasswordControler::class, 'forgotten'])->name('password.forgotten');
-Route::post('/password', [PasswordControler::class, 'sendEmail'])->name('password.sendEmail');
-Route::get('/password/reset/{token}', [PasswordControler::class, 'reset'])->name('password.reset');
-Route::post('/password/reset/{token}', [PasswordControler::class, 'update'])->name('password.update');
+
+    Route::middleware('admin')->group(function (){
+        Route::get('/users/{user}/change-role', [UsersAdmin::class, 'changeRole'])->name('users.changeRole');
+        Route::post('/users/{user}/change-role', [UsersAdmin::class, 'updateRole'])->name('users.updateRole');
+        Route::resource('users', UsersAdmin::class);
+    });
+});
+Route::middleware('guest')->group(function (){
+    Route::get('/login', [Login::class, 'login'])->name('auth.login');
+    Route::post('/login', [Login::class, 'authenticate'])->name('auth.authenticate');
+    Route::get('/register', [Login::class, 'register'])->name('auth.register');
+    Route::post('/register', [Login::class, 'registration'])->name('auth.registration');
+    Route::get('/password', [PasswordControler::class, 'forgotten'])->name('password.forgotten');
+    Route::post('/password', [PasswordControler::class, 'sendEmail'])->name('password.sendEmail');
+    Route::get('/password/reset/{token}', [PasswordControler::class, 'reset'])->name('password.reset');
+    Route::post('/password/reset/{token}', [PasswordControler::class, 'update'])->name('password.update');
+});

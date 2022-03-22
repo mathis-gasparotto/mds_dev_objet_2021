@@ -3,7 +3,7 @@
     <h1 class="card-header text-center">Edit</h1>
 
     <div class="card-body">
-        <form action="{{route('users.update', $user->id)}}" method="post">
+        <form action="{{route('user.update')}}" method="post">
             @method('PUT')
             @csrf
             <div class="mb-3">

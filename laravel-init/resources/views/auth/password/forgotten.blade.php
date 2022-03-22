@@ -13,7 +13,7 @@
             <form action="{{ route('password.forgotten') }}" method="post">
                 @csrf
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
+                    <label for="email" class="form-label form-required">Email:</label>
                     <input class="form-control @error('email') is-invalid @enderror @if (session('status')) is-valid @endif" id="email" value="{{ old('email') }}" type="email" name="email" required>
                     @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>

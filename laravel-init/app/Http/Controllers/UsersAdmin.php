@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\StoreUserFormRequest;
 use App\Http\Requests\UpdateUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Enum;
 
-class Users extends Controller
+class UsersAdmin extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -85,5 +88,29 @@ class Users extends Controller
     {
         $user->delete();
         return redirect()->route('users.index');
+    }
+    public function changeRole(User $user)
+    {
+        if (Auth::user() == $user) {
+            return redirect(route('user.dashboard'))->with('error-perm', "You cannot change your own role");
+        }
+        return view('users.edit_role', ['user' => $user]);
+
+    }
+
+    public function updateRole(Request $request, User $user)
+    {
+        if (Auth::user() == $user) {
+            return redirect(route('user.dashboard'))->with('error-perm', "You cannot change your own role");
+        }
+
+        $attributes = $request->validate([
+            'role' => [
+                'required',
+                new Enum(RoleEnum::class),
+            ],
+        ]);
+        $user->update($attributes);
+        return redirect(route('users.show', $user))->with('status', 'The role has been successfully updated');
     }
 }

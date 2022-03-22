@@ -2,10 +2,6 @@
 
 @section('content')
 
-    @if (session('status'))
-        <div class="alert alert-success status">{{ session('status') }}</div>
-    @endif
-
 <div class="user-container card mx-auto">
     <div class="user-content">
         <img src="{{ $user->avatar_url }}" alt="user's avatar" class="user-img card-img-top">
@@ -13,17 +9,12 @@
             <h5 class="user-name card-title"><span class="user-label">Name:</span> {{ $user->name }}</h5>
             <p class="user-email card-text"><span class="user-label">Email:</span> {{ $user->email }}</p>
             <p class="user-status card-text"><span class="user-label">Status:</span> {{ $user->role }}</p>
-            @if (\Illuminate\Support\Facades\Auth::user()->role == 'admin' | \Illuminate\Support\Facades\Auth::user() == $user)
-            <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Edit</a>
-                @if (\Illuminate\Support\Facades\Auth::user()->role == 'admin' && \Illuminate\Support\Facades\Auth::user() != $user)
-                    <a href="{{route('users.changeRole', $user)}}" class="btn btn-secondary">Change role</a>
-                @endif
-            <form action="{{route('users.destroy', $user)}}" class="btn" method="post">
+            <a href="{{route('user.edit')}}" class="btn btn-primary">Edit</a>
+            <form action="{{route('user.destroy')}}" class="btn" method="post">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            @endif
         </div>
 
     </div>

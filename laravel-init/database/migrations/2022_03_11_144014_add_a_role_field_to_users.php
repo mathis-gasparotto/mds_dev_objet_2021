@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAnAvatarFieldToUsers extends Migration
+class AddARoleFieldToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAnAvatarFieldToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar_url')->after('email')->nullable();
+            $table->string('role')->after('avatar_url')->default('student');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAnAvatarFieldToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('avatar_url');
+            $table->dropColumn('role');
         });
     }
-}
+};
