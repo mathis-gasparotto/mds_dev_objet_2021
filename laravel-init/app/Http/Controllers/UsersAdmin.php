@@ -86,9 +86,13 @@ class UsersAdmin extends Controller
      */
     public function destroy(User $user)
     {
+        if (Auth::user() == $user) {
+            return redirect(route('users.show' , $user))->with('error-perm', 'Since you are an admin, you cannot delete your account yourself.');
+        }
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect(route('users.index'));
     }
+
     public function changeRole(User $user)
     {
         if (Auth::user() == $user) {

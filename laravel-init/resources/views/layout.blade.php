@@ -12,7 +12,7 @@
                 <li class="nav-item">
                     <a href="{{ route('user.dashboard') }}" class="nav-link">Dashboard</a>
                 </li>
-                @if (\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                @if (\Illuminate\Support\Facades\Auth::user()->role == App\Enums\RoleEnum::Admin->value)
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link">User List</a>
                     </li>

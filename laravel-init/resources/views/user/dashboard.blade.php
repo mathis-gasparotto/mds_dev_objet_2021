@@ -10,11 +10,13 @@
             <p class="user-email card-text"><span class="user-label">Email:</span> {{ $user->email }}</p>
             <p class="user-status card-text"><span class="user-label">Status:</span> {{ $user->role }}</p>
             <a href="{{route('user.edit')}}" class="btn btn-primary">Edit</a>
-            <form action="{{route('user.destroy')}}" class="btn" method="post">
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+            @if ($user->role !== App\Enums\RoleEnum::Admin->value)
+                <form action="{{ route('user.destroy') }}" class="btn" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            @endif
         </div>
 
     </div>

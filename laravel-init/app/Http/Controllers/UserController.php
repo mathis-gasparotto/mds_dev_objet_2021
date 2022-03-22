@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\UpdateUserFromDashboardFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +30,12 @@ class UserController extends Controller
 
     public function destroy()
     {
+        if (Auth::user()->role === RoleEnum::Admin->value) {
+            return redirect(route('user.dashboard'))->with('error-perm', 'Since you are an admin, you cannot delete your account yourself.');
+        }
         Auth::user()->delete();
         Auth::logout();
         return redirect(route('auth.login'));
     }
+
 }
