@@ -91,5 +91,11 @@
         margin-bottom: 50px;
         text-align: center;
     }
+    .actions {
+        margin: 2px 0px;
+    }
+    .inline-block {
+        display: inline-block;
+    }
 </style>
 </html>
