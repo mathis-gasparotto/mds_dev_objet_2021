@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function (){
     Route::middleware('admin')->group(function (){
         Route::get('/users/{user}/change-role', [UsersAdmin::class, 'changeRole'])->name('users.changeRole');
         Route::post('/users/{user}/change-role', [UsersAdmin::class, 'updateRole'])->name('users.updateRole');
-        Route::post('/users/{user}', [UsersAdmin::class, 'loginAs'])->name('users.loginAs');
+        Route::post('/dashboard/{user}', [UsersAdmin::class, 'loginAs'])->name('users.loginAs');
         Route::resource('users', UsersAdmin::class);
     });
 });
