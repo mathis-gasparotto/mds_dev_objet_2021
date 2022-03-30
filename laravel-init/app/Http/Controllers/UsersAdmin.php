@@ -117,4 +117,16 @@ class UsersAdmin extends Controller
         $user->update($attributes);
         return redirect(route('users.show', $user))->with('status', 'The role has been successfully updated');
     }
+
+    public function loginAs(User $user)
+    {
+        if (Auth::user()->role != RoleEnum::Admin->value) {
+            return redirect(route('users.index'))->with('error-perm', 'You do not have access to this part of the site.');
+        }
+        if (Auth::user() == $user) {
+            return redirect(route('users.index'))->with('error-perm', 'You cannot login as you.');
+        }
+        Auth::login($user);
+        return redirect(route('users.index'))->with('status', 'Login success!');
+    }
 }

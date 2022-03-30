@@ -18,7 +18,7 @@ class OnlyForAdmin
     {
         $user = $request->user();
         if ($user && $user->role != 'admin') {
-            return redirect(route('user.dashboard'))->with('error-perm', "You do not have access to this part of the site");
+            return redirect(route('user.dashboard'))->with('error-perm', "You do not have access to this part of the site.");
         }
         return $next($request);
     }

@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 /*
     Route::get('/users', [Users::class, 'index'])->name('users.index');
@@ -35,6 +35,7 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function (){
+    Route::get('/', [Login::class, 'index'])->name('user.index');
     Route::get('/logout', [Login::class, 'logout'])->name('auth.logout');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     Route::get('/dashboard/edit', [UserController::class, 'edit'])->name('user.edit');
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function (){
     Route::middleware('admin')->group(function (){
         Route::get('/users/{user}/change-role', [UsersAdmin::class, 'changeRole'])->name('users.changeRole');
         Route::post('/users/{user}/change-role', [UsersAdmin::class, 'updateRole'])->name('users.updateRole');
+        Route::post('/users/{user}', [UsersAdmin::class, 'loginAs'])->name('users.loginAs');
         Route::resource('users', UsersAdmin::class);
     });
 });

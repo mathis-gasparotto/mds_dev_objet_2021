@@ -10,6 +10,10 @@ use Illuminate\Validation\Rules\Password as PasswordRules;
 
 class Login extends Controller
 {
+    public function index()
+    {
+        return redirect(route('user.dashboard'));
+    }
     public function login ()
     {
         return view('auth.login');
