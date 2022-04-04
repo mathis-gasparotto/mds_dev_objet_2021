@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
+
+
+Route::get('/auth/redirect', [UserController::class, 'redirect'])->name('auth.redirect');
+Route::get('/auth/callback', [UserController::class, 'auth'])->name('auth.callback');
+Route::post('/auth/callback', [UserController::class, 'register'])->name('auth.register');
+

@@ -18,9 +18,20 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'github_id',
         'name',
         'email',
-        'password',
+        'contact_email',
+        'phone',
+        'address',
+        'bank_account_owner',
+        'bank_domiciliation',
+        'bank_rib',
+        'bank_iban',
+        'bank_bic',
+        'company_name',
+        'company_siret',
+        'company_ape',
     ];
 
     /**
@@ -29,8 +40,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -39,6 +50,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        //
     ];
 }
