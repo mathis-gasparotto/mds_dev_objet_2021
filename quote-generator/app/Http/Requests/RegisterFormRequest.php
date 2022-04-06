@@ -27,6 +27,7 @@ class RegisterFormRequest extends FormRequest
             'github_id' => [
                 'required',
                 'integer',
+                'unique:users',
             ],
             'name' => [
                 'required',

@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Client extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -18,20 +15,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'github_id',
+        'user_id',
         'name',
         'email',
-        'contact_email',
         'phone',
         'address',
-        'bank_account_owner',
-        'bank_domiciliation',
-        'bank_rib',
-        'bank_iban',
-        'bank_bic',
-        'company_name',
-        'company_siret',
-        'company_ape',
+        'siret',
     ];
 
     /**
@@ -53,8 +42,8 @@ class User extends Authenticatable
         //
     ];
 
-    public function clients()
+    public function user()
     {
-        return $this->hasMany(Client::class);
+        return $this->belongsTo(User::class);
     }
 }

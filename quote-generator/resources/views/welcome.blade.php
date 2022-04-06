@@ -1,7 +1,7 @@
 @extends('../layout')
 
 @section('content')
-
-    <a href="{{ route('auth.redirect') }}" class="btn btn-primary">Login with GitHub</a>
-
+    @auth
+        <h3>Hi {{ \Illuminate\Support\Facades\Auth::user()->name }}!</h3>
+    @endauth
 @endsection

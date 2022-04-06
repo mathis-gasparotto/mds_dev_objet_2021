@@ -1,0 +1,80 @@
+body {
+
+}
+main {
+    text-align: center;
+    margin-top: 100px;
+}
+header {
+    margin-bottom: 70px;
+}
+footer {
+    margin-top: 50px;
+}
+.form-required::after {
+    content: "*";
+    color: red;
+    margin-left: 3px;
+}
+.status {
+    width: 30%;
+    margin: auto;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.actions {
+    margin: 2px 0px;
+}
+.inline-block {
+    display: inline-block !important;
+}
+.mb-70 {
+    margin-bottom: 70px !important;
+}
+.h-100 {
+    height: 100px !important;
+}
+.dual-card {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin: auto;
+}
+.dual-card > .card {
+    width: 48%;
+}
+.card-form {
+    width: 80%;
+    margin: auto;
+}
+.cards-btn {
+    width: 80%;
+    margin: auto;
+}
+#clients-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: auto auto -50px;
+}
+.client-container {
+    margin-bottom: 50px;
+    width: 20rem;
+    height: 100%;
+}
+.client-container .user-img {
+    height: 15rem;
+    object-fit: cover;
+}
+.client-label {
+    font-weight: bold;
+}
+.form-floating label {
+    opacity: .75;
+}
+.navbar-light .navbar-nav .nav-link {
+    padding-left: 20px;
+    padding-right: 20px;
+}
