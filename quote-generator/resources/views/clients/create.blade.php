@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="form-floating mb-3">
-                    <input placeholder="Email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{old('email')}}" type="email" name="email">
+                    <input placeholder="Email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{old('email')}}" type="text" name="email">
                     <label for="email" class="form-label">Email</label>
                     @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>

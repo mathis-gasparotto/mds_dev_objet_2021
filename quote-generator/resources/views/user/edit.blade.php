@@ -1,38 +1,148 @@
-<container class="card card-form">
+@extends('layout')
 
-    <h1 class="card-header text-center">Edit</h1>
+@section('content')
 
-    <div class="card-body">
-        <form action="{{route('user.update')}}" method="post">
-            @method('PUT')
-            @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label form-required">Name:</label>
-                <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" value="{{ $user->name }}" required>
-                @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label form-required">Email:</label>
-                <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" value="{{ $user->email }}" required>
-                @error('email')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label form-required">Avatar URL:</label>
-                <input class="form-control @error('avatar_url') is-invalid @enderror" id="avatar_url" type="text" name="avatar_url" value="{{ $user->avatar_url }}" required>
-                @error('avatar_url')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Edit</button>
+    <form action="{{route('user.update')}}" method="post">
+        @method('PUT')
+        @csrf
+        <h1 class="text-center mb-5">Editing Your Account Information</h1>
 
-        </form>
-    </div>
+        <div class="dual-card mb-4">
+            <container class="card card-form m-0">
+
+                <h3 class="card-header text-center">Personal informations</h3>
+
+                <div class="card-body">
+
+                    <div class="form-floating mb-3">
+                        <input placeholder="Name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name', $user->name) }}" type="text" name="name">
+                        <label for="name" class="form-label form-required">Name</label>
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email', $user->email) }}" type="text" name="email">
+                        <label for="name" class="form-label form-required">Email</label>
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Contact Email" class="form-control @error('contact_email') is-invalid @enderror" id="contact_email" value="{{ old('contact_email', $user->contact_email) }}" type="text" name="contact_email">
+                        <label for="contact_email" class="form-label form-required">Contact Email</label>
+                        @error('contact_email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Phone" class="form-control @error('phone') is-invalid @enderror" id="phone" value="{{ old('phone', $user->phone) }}" type="text" name="phone">
+                        <label for="phone" class="form-label form-required">Phone</label>
+                        @error('phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea placeholder="Address" class="form-control h-100 @error('address') is-invalid @enderror" id="address" name="address">{{ old('address', $user->address) }}</textarea>
+                        <label for="address" class="form-label form-required">Address</label>
+                        @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                </div>
+            </container>
+            <container class="card card-form m-0">
+
+                <h3 class="card-header text-center">Bank informations</h3>
 
 
+                <div class="card-body">
+                    <div class="form-floating mb-3">
+                        <input placeholder="Bank Account Owner" class="form-control @error('bank_account_owner') is-invalid @enderror" id="bank_account_owner" value="{{ old('bank_account_owner', $user->bank_account_owner) }}" type="text" name="bank_account_owner">
+                        <label for="bank_account_owner" class="form-label form-required">Bank Account Owner</label>
+                        @error('bank_account_owner')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
-</container>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Bank Domiciliation" class="form-control @error('bank_domiciliation') is-invalid @enderror" id="bank_domiciliation" value="{{ old('bank_domiciliation', $user->bank_domiciliation) }}" type="text" name="bank_domiciliation">
+                        <label for="bank_domiciliation" class="form-label form-required">Bank Domiciliation</label>
+                        @error('bank_domiciliation')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Bank RIB" class="form-control @error('bank_rib') is-invalid @enderror" id="bank_rib" value="{{ old('bank_rib', $user->bank_rib) }}" type="text" name="bank_rib">
+                        <label for="bank_rib" class="form-label form-required">RIB</label>
+                        @error('bank_rib')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Bank IBAN" class="form-control @error('bank_iban') is-invalid @enderror" id="bank_iban" value="{{ old('bank_iban', $user->bank_iban) }}" type="text" name="bank_iban">
+                        <label for="bank_iban" class="form-label form-required">IBAN</label>
+                        @error('bank_iban')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Bank BIC" class="form-control @error('bank_bic') is-invalid @enderror" id="bank_bic" value="{{ old('bank_bic', $user->bank_bic) }}" type="text" name="bank_bic">
+                        <label for="bank_bic" class="form-label form-required">BIC</label>
+                        @error('bank_bic')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                </div>
+            </container>
+        </div>
+        <div>
+            <container class="card card-form">
+
+                <h3 class="card-header text-center">Company informations</h3>
+
+
+                <div class="card-body">
+                    <div class="form-floating mb-3">
+                        <input placeholder="Company Name" class="form-control @error('company_name') is-invalid @enderror" id="company_name" value="{{ old('company_name', $user->company_name) }}" type="text" name="company_name">
+                        <label for="company_name" class="form-label form-required">Company Name</label>
+                        @error('company_name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Company SIRET" class="form-control @error('company_siret') is-invalid @enderror" id="company_siret" value="{{ old('company_siret', $user->company_siret) }}" type="text" name="company_siret">
+                        <label for="company_siret" class="form-label form-required">SIRET</label>
+                        @error('company_siret')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input placeholder="Company APE" class="form-control @error('company_ape') is-invalid @enderror" id="company_ape" value="{{ old('company_ape', $user->company_ape) }}" type="text" name="company_ape">
+                        <label for="company_ape" class="form-label form-required">APE</label>
+                        @error('company_ape')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                </div>
+            </container>
+        </div>
+        <div class="cards-btn mt-4">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+
+
+@endsection

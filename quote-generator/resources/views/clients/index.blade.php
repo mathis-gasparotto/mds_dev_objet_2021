@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <h1 class="mb-70">Users List</h1>
-    <a href="{{ route('clients.create') }}" class="btn btn-primary mb-5">Create a new client</a>
+    <h1 class="mb-70">Clients List</h1>
+    <a href="{{ route('clients.create') }}" class="btn btn-primary actions mb-5">Add a new client</a>
     <div id="clients-container">
         @foreach($clients as $client)
             <div class="client-container card">
@@ -32,6 +32,6 @@
             </div>
         @endforeach
     </div>
-    <a href="{{ route('clients.create') }}" class="btn btn-primary mt-5">Create a new client</a>
+    <a href="{{ route('clients.create') }}" class="btn btn-primary actions mt-5">Add a new client</a>
 
 @endsection

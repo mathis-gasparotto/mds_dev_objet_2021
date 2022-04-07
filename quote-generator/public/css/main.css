@@ -64,11 +64,10 @@ footer {
     width: 20rem;
     height: 100%;
 }
-.client-container .user-img {
-    height: 15rem;
-    object-fit: cover;
-}
 .client-label {
+    font-weight: bold;
+}
+.user-label {
     font-weight: bold;
 }
 .form-floating label {

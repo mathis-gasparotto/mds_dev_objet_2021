@@ -14,6 +14,9 @@
     @if (session('success'))
         <div class="alert alert-success status">{{ session('success') }}</div>
     @endif
+    @if (session('info'))
+        <div class="alert alert-primary status">{{ session('info') }}</div>
+    @endif
 
     @yield('content')
 </main>

@@ -15,6 +15,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function redirect()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
     public function auth()
     {
         $githubUser = Socialite::driver('github')->user();
@@ -22,24 +27,23 @@ class LoginController extends Controller
 
         if ($user) {
             Auth::login($user);
-            return redirect(route('index'))->with('success', "You have been logged in");
+            return redirect(route('index'))->with('success', "You have been successfully logged in");
         }
-
-        return view('auth.register', ['github_id' => $githubUser->id, 'email' => $githubUser->email, 'name' => $githubUser->name]);
+        $newUser = User::create(['github_id' => $githubUser->id, 'name' => $githubUser->name, 'email' => $githubUser->email]);
+        Auth::login($newUser);
+        return redirect(route('auth.register'));
 
     }
 
-    public function redirect()
+    public function register()
     {
-        return Socialite::driver('github')->redirect();
+        return view('auth.register');
     }
 
     public function registration(RegisterFormRequest $request)
     {
         $input = $request->safe()->only([
-            'github_id',
             'name',
-            'email',
             'contact_email',
             'phone',
             'address',
@@ -52,14 +56,13 @@ class LoginController extends Controller
             'company_siret',
             'company_ape',
         ]);
-        $user = User::create($input);
-        Auth::login($user);
-        return redirect()->route('index')->with('success', "You have been registered and logged in");
+        Auth::user()->update($input);
+        return redirect()->route('index')->with('success', "You have been successfully registered and logged in");
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect(route('auth.login'))->with('success', "You have been logout");
+        return redirect(route('auth.login'))->with('success', "You have been successfully logout");
     }
 }

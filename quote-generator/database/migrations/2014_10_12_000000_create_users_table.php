@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('github_id')->unique();
-            $table->string('name');
+            $table->string('github_id')->unique();
+            $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->string('contact_email');
-            $table->string('phone');
-            $table->text('address');
-            $table->string('bank_account_owner');
-            $table->string('bank_domiciliation');
-            $table->string('bank_rib');
-            $table->string('bank_iban');
-            $table->string('bank_bic');
-            $table->string('company_name');
-            $table->string('company_siret');
-            $table->string('company_ape');
+            $table->string('contact_email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('bank_account_owner')->nullable();
+            $table->string('bank_domiciliation')->nullable();
+            $table->string('bank_rib')->nullable();
+            $table->string('bank_iban')->nullable();
+            $table->string('bank_bic')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_siret')->nullable();
+            $table->string('company_ape')->nullable();
             $table->timestamps();
         });
     }

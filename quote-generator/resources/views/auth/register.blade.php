@@ -2,8 +2,8 @@
 
 @section('content')
     <form action="{{ route('auth.register') }}" method="post">
+        @method('PUT')
         @csrf
-        <input type="hidden" name="github_id" value="{{ $github_id }}">
         <h1 class="text-center mb-5">Register</h1>
 
         <div class="dual-card mb-4">
@@ -14,17 +14,9 @@
                 <div class="card-body">
 
                     <div class="form-floating mb-3">
-                        <input placeholder="Name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $name }}" type="text" name="name">
+                        <input placeholder="Name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name', \Illuminate\Support\Facades\Auth::user()->name) }}" type="text" name="name">
                         <label for="name" class="form-label form-required">Name</label>
                         @error('name')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input placeholder="Email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ $email }}" type="email" name="email" readonly>
-                        <label for="email" class="form-label form-required">Email</label>
-                        @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
@@ -79,7 +71,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input placeholder="Bank RIB" class="form-control @error('bank_rib') is-invalid @enderror" id="bank_rib" value="{{old('bank_rib')}}" type="text" name="bank_rib">
-                        <label for="bank_rib" class="form-label form-required">Bank RIB</label>
+                        <label for="bank_rib" class="form-label form-required">RIB</label>
                         @error('bank_rib')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -87,7 +79,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input placeholder="Bank IBAN" class="form-control @error('bank_iban') is-invalid @enderror" id="bank_iban" value="{{old('bank_iban')}}" type="text" name="bank_iban">
-                        <label for="bank_iban" class="form-label form-required">Bank IBAN</label>
+                        <label for="bank_iban" class="form-label form-required">IBAN</label>
                         @error('bank_iban')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -95,7 +87,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input placeholder="Bank BIC" class="form-control @error('bank_bic') is-invalid @enderror" id="bank_bic" value="{{old('bank_bic')}}" type="text" name="bank_bic">
-                        <label for="bank_bic" class="form-label form-required">Bank BIC</label>
+                        <label for="bank_bic" class="form-label form-required">BIC</label>
                         @error('bank_bic')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -121,7 +113,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input placeholder="Company SIRET" class="form-control @error('company_siret') is-invalid @enderror" id="company_siret" value="{{old('company_siret')}}" type="text" name="company_siret">
-                        <label for="company_siret" class="form-label form-required">Company SIRET</label>
+                        <label for="company_siret" class="form-label form-required">SIRET</label>
                         @error('company_siret')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -129,7 +121,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input placeholder="Company APE" class="form-control @error('company_ape') is-invalid @enderror" id="company_ape" value="{{old('company_ape')}}" type="text" name="company_ape">
-                        <label for="company_ape" class="form-label form-required">Company APE</label>
+                        <label for="company_ape" class="form-label form-required">APE</label>
                         @error('company_ape')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -141,8 +133,6 @@
         <div class="cards-btn mt-4">
             <button type="submit" class="btn btn-primary">Register</button>
         </div>
-            </div>
-        </container>
     </form>
 
 @endsection

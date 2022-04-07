@@ -13,13 +13,16 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         @auth
+                            <li class="nav-item">
+                                <a href="{{ route('user.show') }}" class="nav-link">Account</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Clients
+                                    My Clients
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                                    <li><a href="{{ route('clients.index') }}" class="nav-link">Clients list</a></li>
-                                    <li><a href="{{ route('clients.create') }}" class="nav-link">Add new client</a></li>
+                                    <li><a href="{{ route('clients.index') }}" class="nav-link">My Clients List</a></li>
+                                    <li><a href="{{ route('clients.create') }}" class="nav-link">Add a Client</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
