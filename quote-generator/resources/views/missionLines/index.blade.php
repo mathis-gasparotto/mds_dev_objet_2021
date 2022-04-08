@@ -27,7 +27,7 @@
                 <tr>
                     <th scope="row">{{ $missionLine->title }}</th>
                     <td>{{ $missionLine->quantity }} {{ $missionLine->unit }}</td>
-                    <td>{{ $missionLine->unit_price }} €</td>
+                    <td>{{ number_format($missionLine->unit_price,2) }} €</td>
                     <td>{{ number_format($missionLine->quantity * $missionLine->unit_price,2) }} €</td>
                     <td>
                         <a href="{{route('missionLines.edit', $missionLine)}}" class="btn btn-primary actions">Edit</a>
