@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
-            $table->string('ref');
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->string('ref');
             $table->string('title');
-            $table->float('advance');
+            $table->float('down_payment')->unsigned();
             $table->timestamps();
         });
     }

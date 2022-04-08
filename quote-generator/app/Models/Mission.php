@@ -15,7 +15,10 @@ class Mission extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'client_id',
+        'ref',
+        'title',
+        'down_payment',
     ];
 
     /**
@@ -36,4 +39,14 @@ class Mission extends Model
     protected $casts = [
         //
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function missionLines()
+    {
+        return $this->hasMany(MissionLine::class);
+    }
 }

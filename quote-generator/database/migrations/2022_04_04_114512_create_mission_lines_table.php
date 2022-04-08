@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('mission_lines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mission_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->integer('quantity');
-            $table->float('unit_price');
-            $table->string('unit');
+            $table->string('title');
+            $table->unsignedInteger('quantity');
+            $table->float('unit_price')->unsigned();
+            $table->string('unit')->nullable();
             $table->timestamps();
         });
     }

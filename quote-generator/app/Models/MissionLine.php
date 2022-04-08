@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class MissionLine extends Model
 {
     use HasFactory;
 
@@ -15,13 +15,11 @@ class Client extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'name',
-        'ref',
-        'email',
-        'phone',
-        'address',
-        'siret',
+        'mission_id',
+        'title',
+        'quantity',
+        'unit_price',
+        'unit',
     ];
 
     /**
@@ -43,13 +41,8 @@ class Client extends Model
         //
     ];
 
-    public function user()
+    public function mission()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function missions()
-    {
-        return $this->hasMany(Mission::class);
+        return $this->belongsTo(Mission::class);
     }
 }

@@ -34,6 +34,12 @@ footer {
 .h-100 {
     height: 100px !important;
 }
+.w-30 {
+    width: 30% !important;
+}
+.w-40 {
+    width: 40% !important;
+}
 .dual-card {
     display: flex;
     width: 80%;
@@ -51,7 +57,7 @@ footer {
     width: 80%;
     margin: auto;
 }
-#clients-container {
+#cards-container {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -59,15 +65,12 @@ footer {
     justify-content: space-evenly;
     margin: auto auto -50px;
 }
-.client-container {
+.card-container {
     margin-bottom: 50px;
     width: 20rem;
     height: 100%;
 }
-.client-label {
-    font-weight: bold;
-}
-.user-label {
+.card-label {
     font-weight: bold;
 }
 .form-floating label {
@@ -76,4 +79,7 @@ footer {
 .navbar-light .navbar-nav .nav-link {
     padding-left: 20px;
     padding-right: 20px;
+}
+.mission-card {
+    width: 40rem;
 }

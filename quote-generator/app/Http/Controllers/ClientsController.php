@@ -12,10 +12,7 @@ class ClientsController extends Controller
     public function index()
     {
         $clients = Auth::user()->clients;
-        //dd($clients);
-        return $clients
-            ? view("clients.index", ['clients' => $clients])
-            : view("clients.index", ['clients' => $clients])->with('error', "You don't have a registered client");
+        return view("clients.index", ['clients' => $clients]);
     }
 
     public function create()
@@ -25,7 +22,7 @@ class ClientsController extends Controller
 
     public function store(ClientFormRequest $request)
     {
-        $input = $request->safe()->only(['name', 'email', 'phone', 'address', 'siret']);
+        $input = $request->safe()->only(['name', 'ref', 'email', 'phone', 'address', 'siret']);
         $client = Auth::user()->clients()->create($input);
         return redirect(route('clients.index'))->with('success', "A new client has been successfully created.");
     }
@@ -37,7 +34,7 @@ class ClientsController extends Controller
 
     public function update(ClientFormRequest $request, Client $client)
     {
-        $input = $request->safe()->only(['name', 'email', 'phone', 'address', 'siret']);
+        $input = $request->safe()->only(['name', 'ref', 'email', 'phone', 'address', 'siret']);
         $client->update($input);
         return redirect(route('clients.index'))->with('success', "The client as been successfully updated");
     }
