@@ -7,7 +7,7 @@
 
     @if(!$client->missions->isEmpty())
         <div>
-            <a href="{{ route('clients.index') }}" class="btn btn-warning actions mb-5">Go to the clients list</a>
+            <a href="{{ route('clients.index') }}#{{ $client->id }}" class="btn btn-warning actions mb-5">Go to the clients list</a>
         </div>
         <a href="{{ route('missions.create', $client) }}" class="btn btn-primary actions mb-5">Create a new mission</a>
         <div id="cards-container">
@@ -80,7 +80,7 @@
     @else
         <div class="alert alert-secondary w-30 m-auto">You don't have any missions registered for this client</div>
         <a href="{{ route('missions.create', $client) }}" class="btn btn-primary actions mt-5">Create a new mission</a>
-        <a href="{{ route('clients.index') }}" class="btn btn-warning actions mt-5">Go to the clients list</a>
+        <a href="{{ route('clients.index') }}#{{ $client->id }}" class="btn btn-warning actions mt-5">Go to the clients list</a>
     @endif
 
 @endsection
