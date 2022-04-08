@@ -12,7 +12,7 @@
         <a href="{{ route('missions.create', $client) }}" class="btn btn-primary actions mb-5">Create a new mission</a>
         <div id="cards-container">
             @foreach($client->missions as $mission)
-                <div class="card-container card mission-card">
+                <div class="card-container card mission-card" id="{{ $mission->id }}">
                     <div class="card-content">
                         <div class="card-body">
                             <h3 class="card-title mb-3">{{ $mission->title }}</h3>
@@ -59,8 +59,10 @@
                                     $totalPrice = 0 ;
                                 @endphp
                             @endif
+                            @if(!$mission->missionLines->isEmpty())
+                                <a href="{{route('quote.show', $mission)}}" class="btn btn-success actions">Generate Quote</a>
+                            @endif
                             <a href="{{route('missions.edit', $mission)}}" class="btn btn-primary actions">Edit</a>
-                            <!--<a href="{{ route('missionLines.index', $mission) }}" class="btn btn-warning actions">Manage mission lines</a>-->
                             <a href="{{ route('missionLines.create', $mission) }}" class="btn btn-warning actions">Create a new mission lines</a>
                             <form action="{{route('missions.destroy', $mission)}}" class="inline-block" method="post">
                                 @method('DELETE')
@@ -76,7 +78,7 @@
         </div>
         <a href="{{ route('missions.create', $client) }}" class="btn btn-primary actions mt-5">Create a new mission</a>
     @else
-        <div class="alert alert-danger w-30 m-auto">You don't have any missions registered for this client</div>
+        <div class="alert alert-secondary w-30 m-auto">You don't have any missions registered for this client</div>
         <a href="{{ route('missions.create', $client) }}" class="btn btn-primary actions mt-5">Create a new mission</a>
         <a href="{{ route('clients.index') }}" class="btn btn-warning actions mt-5">Go to the clients list</a>
     @endif

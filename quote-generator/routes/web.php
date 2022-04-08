@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('registration')->group(function () {
         Route::get('/', function () {
-            return view('welcome');
+            return view('dashboard');
         })->name('index');
 
         Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/mission_line/{missionLine}/edit', [MissionLinesController::class, 'update'])->name('missionLines.update');
         Route::delete('/mission_line/{missionLine}/delete', [MissionLinesController::class, 'destroy'])->name('missionLines.destroy');
 
+        Route::get('/mission/{mission}/quote', [MissionsController::class, 'showQuote'])->name('quote.show');
     });
 
 });

@@ -24,7 +24,7 @@ class ClientsController extends Controller
     {
         $input = $request->safe()->only(['name', 'ref', 'email', 'phone', 'address', 'siret']);
         $client = Auth::user()->clients()->create($input);
-        return redirect(route('clients.index'))->with('success', "A new client has been successfully created.");
+        return redirect(route('clients.index') . "#" . $client->id)->with('success', "A new client has been successfully created.");
     }
 
     public function edit(Client $client)
@@ -36,7 +36,7 @@ class ClientsController extends Controller
     {
         $input = $request->safe()->only(['name', 'ref', 'email', 'phone', 'address', 'siret']);
         $client->update($input);
-        return redirect(route('clients.index'))->with('success', "The client as been successfully updated");
+        return redirect(route('clients.index') . "#" . $client->id)->with('success', "The client as been successfully updated");
     }
 
     public function destroy(Client $client)
@@ -44,8 +44,14 @@ class ClientsController extends Controller
         if (Auth::user() == $client->user)
         {
             $client->delete();
-            return redirect(route('clients.index'))->with('success', 'The client as been successfully deleted');
+            foreach ($user->missions as $mission) {
+                $mission->delete();
+                foreach ($mission->missionLines as $missionLine) {
+                    $missionLine->delete();
+                }
+            }
+            return redirect(route('clients.index') . "#" . $client->id)->with('success', 'The client as been successfully deleted');
         }
-        return redirect(route('clients.index'))->with('error', "You cannot delete this client");
+        return redirect(route('clients.index') . "#" . $client->id)->with('error', "You cannot delete this client");
     }
 }

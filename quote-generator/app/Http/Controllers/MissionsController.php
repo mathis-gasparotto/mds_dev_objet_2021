@@ -30,7 +30,7 @@ class MissionsController extends Controller
             'down_payment',
         ]);
         $mission = $client->missions()->create($input);
-        return redirect(route('missions.index', $client))->with('success', "A new mission has been successfully created.");
+        return redirect(route('missionLines.create', $mission))->with('success', "A new mission has been successfully created.");
     }
 
     public function edit(Mission $mission)
@@ -46,7 +46,7 @@ class MissionsController extends Controller
             'down_payment',
         ]);
         $mission->update($input);
-        return redirect(route('missions.index', $mission->client))->with('success', "The mission as been successfully updated");
+        return redirect(route('missions.index', $mission->client) . "#" . $mission->id)->with('success', "The mission as been successfully updated");
     }
 
     public function destroy(Mission $mission)
@@ -54,8 +54,16 @@ class MissionsController extends Controller
         if (Auth::user() == $mission->client->user)
         {
             $mission->delete();
-            return redirect(route('missions.index', $mission->client))->with('success', 'The mission as been successfully deleted');
+            foreach ($mission->missionLines as $missionLine) {
+                $missionLine->delete();
+            }
+            return redirect(route('missions.index', $mission->client) . "#" . $mission->id)->with('success', 'The mission as been successfully deleted');
         }
-        return redirect(route('missions.index', $mission->client))->with('error', "You cannot delete this mission");
+        return redirect(route('missions.index', $mission->client) . "#" . $mission->id)->with('error', "You cannot delete this mission");
+    }
+
+    public function showQuote(Mission $mission)
+    {
+        return view('quote.show', ['mission' => $mission]);
     }
 }

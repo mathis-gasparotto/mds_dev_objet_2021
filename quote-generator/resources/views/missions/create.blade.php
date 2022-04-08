@@ -28,7 +28,7 @@
 
                 </div>
                 <div class="form-floating mb-3">
-                    <input placeholder="Down payment percentage" class="form-control @error('down_payment') is-invalid @enderror" id="down_payment" value="{{ old('down_payment') }}" type="number" min="0" max="100" step="0.01" name="down_payment">
+                    <input placeholder="Down payment percentage" class="form-control @error('down_payment') is-invalid @enderror" id="down_payment" value="{{ old('down_payment') }}" type="number" step="0.01" name="down_payment">
                     <label for="down_payment" class="form-label form-required">Down payment percentage (in %)</label>
                     @error('down_payment')
                     <div class="alert alert-danger">{{ $message }}</div>

@@ -32,7 +32,6 @@ class MissionLineFormRequest extends FormRequest
             'quantity' => [
                 'required',
                 'integer',
-                'max:191',
                 'min:0',
             ],
             'unit_price' => [

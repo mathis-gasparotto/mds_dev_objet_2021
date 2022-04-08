@@ -51,6 +51,18 @@ class UserController extends Controller
         foreach (Auth::user()->clients as $client)
         {
             $client->delete();
+            foreach (Auth::user()->clients as $client)
+            {
+                $client->delete();
+                foreach ($client->missions as $mission)
+                {
+                    $mission->delete();
+                    foreach ($mission->missionLines as $missionLine)
+                    {
+                        $missionLine->delete();
+                    }
+                }
+            }
         }
         Auth::user()->delete();
         return redirect(route('auth.login'))->with('success', "Your account and your clients list as been successfully deleted");

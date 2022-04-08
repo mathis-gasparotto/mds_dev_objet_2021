@@ -44,11 +44,15 @@
                     @enderror
 
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary actions">Create</button>
+                @if(!$mission->missionLines->isEmpty())
+                    <a href="{{ route('missions.index', $mission->client) }}#{{ $mission->id }}" class="btn btn-warning actions">Back to the missions list</a>
+                @endif
             </form>
         </div>
 
     </container>
+
 
 
 @endsection

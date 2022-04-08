@@ -7,7 +7,7 @@
 </head>
 <body>
 @extends('header')
-<main>
+<main class="text-center mt-100">
     @if (session('error'))
         <div class="alert alert-danger status">{{ session('error') }}</div>
     @endif

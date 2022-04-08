@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class MissionLinesController extends Controller
 {
 
-    public function index(Mission $mission)
-    {
-        return view("missionLines.index", ['mission' => $mission]);
-    }
-
     public function create(Mission $mission)
     {
         return view("missionLines.create", ['mission' => $mission]);
@@ -30,8 +25,7 @@ class MissionLinesController extends Controller
             'unit',
         ]);
         $mission_line = $mission->missionLines()->create($input);
-        //return redirect(route('missionLines.index', $mission))->with('success', "A new mission line has been successfully created.");
-        return redirect(route('missions.index', $mission->client))->with('success', "A new mission line has been successfully created.");
+        return redirect(route('missionLines.create', $mission))->with('success', "A new mission line has been successfully created.");
     }
 
     public function edit(MissionLine $missionLine)
@@ -48,8 +42,7 @@ class MissionLinesController extends Controller
             'unit',
             ]);
         $missionLine->update($input);
-        //return redirect(route('missionLines.index', $missionLine->mission))->with('success', "The mission line as been successfully updated");
-        return redirect(route('missions.index', $missionLine->mission->client))->with('success', "The mission line as been successfully updated");
+        return redirect(route('missions.index', $missionLine->mission->client) . "#" . $missionLine->mission->id)->with('success', "The mission line as been successfully updated");
     }
 
     public function destroy(MissionLine $missionLine)
@@ -57,10 +50,12 @@ class MissionLinesController extends Controller
         if (Auth::user() == $missionLine->mission->client->user)
         {
             $missionLine->delete();
-            //return redirect(route('missionLines.index', $missionLine->mission))->with('success', 'The mission line as been successfully deleted');
-            return redirect(route('missions.index', $missionLine->mission->client))->with('success', 'The mission line as been successfully deleted');
+            if ($missionLine->mission->missionLines->isEmpty())
+            {
+                return redirect(route('missionLines.create', $missionLine->mission))->with('success', 'The mission line as been successfully deleted. But there is no more mission line, please add some.');
+            }
+            return redirect(route('missions.index', $missionLine->mission->client) . "#" . $missionLine->mission->id)->with('success', 'The mission line as been successfully deleted');
         }
-        //return redirect(route('missionLines.index', $missionLine->mission))->with('error', "You cannot delete this mission line");
-        return redirect(route('missions.index', $missionLine->mission->client))->with('error', "You cannot delete this mission line");
+        return redirect(route('missions.index', $missionLine->mission->client) . "#" . $missionLine->mission->id)->with('error', "You cannot delete this mission line");
     }
 }
