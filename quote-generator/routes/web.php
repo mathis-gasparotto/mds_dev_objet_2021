@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('registration')->group(function () {
         Route::get('/', function () {
             return view('dashboard');
-        })->name('index');
+        })->name('dashboard');
 
         Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 

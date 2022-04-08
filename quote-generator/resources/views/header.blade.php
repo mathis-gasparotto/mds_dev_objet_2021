@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="navbar-brand">
                 @auth
-                    <a class="navbar-brand" href="{{ route('user.show') }}">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">Dashboard</a>
                 @endauth
             </div>
 
@@ -18,6 +18,9 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         @auth
+                            <li class="nav-item">
+                                <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.show') }}" class="nav-link">My Account</a>
                             </li>

@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if ($user) {
             Auth::login($user);
-            return redirect(route('index'))->with('success', "You have been successfully logged in");
+            return redirect(route('dashboard'))->with('success', "You have been successfully logged in");
         }
         $newUser = User::create(['github_id' => $githubUser->id, 'name' => $githubUser->name, 'email' => $githubUser->email]);
         Auth::login($newUser);
@@ -58,7 +58,7 @@ class LoginController extends Controller
             'company_ape',
         ]);
         Auth::user()->update($input);
-        return redirect()->route('index')->with('success', "You have been successfully registered and logged in");
+        return redirect()->route('dashboard')->with('success', "You have been successfully registered and logged in");
     }
 
     public function logout()
