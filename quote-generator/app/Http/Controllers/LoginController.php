@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\UpdateUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,10 +40,11 @@ class LoginController extends Controller
         return view('auth.register');
     }
 
-    public function registration(RegisterFormRequest $request)
+    public function registration(UpdateUserFormRequest $request)
     {
         $input = $request->safe()->only([
             'name',
+            'email',
             'contact_email',
             'phone',
             'address',

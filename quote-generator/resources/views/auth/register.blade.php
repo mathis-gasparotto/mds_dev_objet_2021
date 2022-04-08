@@ -22,6 +22,14 @@
 
                     </div>
                     <div class="form-floating mb-3">
+                        <input placeholder="Email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{old('email', \Illuminate\Support\Facades\Auth::user()->email)}}" type="text" name="email">
+                        <label for="email" class="form-label form-required">Email</label>
+                        @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-floating mb-3">
                         <input placeholder="Contact Email" class="form-control @error('contact_email') is-invalid @enderror" id="contact_email" value="{{old('contact_email')}}" type="text" name="contact_email">
                         <label for="contact_email" class="form-label form-required">Contact Email</label>
                         @error('contact_email')

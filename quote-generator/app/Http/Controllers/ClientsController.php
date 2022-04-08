@@ -44,7 +44,7 @@ class ClientsController extends Controller
         if (Auth::user() == $client->user)
         {
             $client->delete();
-            foreach ($user->missions as $mission) {
+            foreach ($client->missions as $mission) {
                 $mission->delete();
                 foreach ($mission->missionLines as $missionLine) {
                     $missionLine->delete();
