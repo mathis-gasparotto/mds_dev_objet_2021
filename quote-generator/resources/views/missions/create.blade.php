@@ -14,7 +14,7 @@
                 <div class="form-floating mb-3">
                     <input placeholder="Title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" type="text" name="title">
                     <label for="title" class="form-label form-required">Title</label>
-                    @error('phone')
+                    @error('title')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
