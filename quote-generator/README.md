@@ -13,7 +13,7 @@
 
 Générateur de facture :
 
-Lors du module de POO de l’année dernière, j’ai eu l’occasion de mettre en place un générateur de facture. Sur ce site, il se connecte à notre compte, on peut ajouter des clients, ajouter des missions liées à des clients, et en sortir tous les documents utiles (facture du montant total, récapitulatif de la mission, etc…). 
+Lors du module de POO de l’année 2021-2022, j’ai eu l’occasion de mettre en place un générateur de facture. Sur ce site, il se connecte à notre compte, on peut ajouter des clients, ajouter des missions liées à des clients, et en sortir tous les documents utiles (facture du montant total, récapitulatif de la mission, etc…). 
 
 La techno utilisée est le framework Laravel.
 
